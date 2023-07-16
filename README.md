@@ -1,66 +1,143 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://smileitsolutions.uk/_nuxt/SmileITSolutionsMainLogoWhiteBG.398f0df7.png" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Laravel Bank API for a Fake Financial Institution
 
-## About Laravel
+This project involves building an internal API for a fake financial institution using PHP and Laravel. The API should allow bank employees to perform basic banking functions such as creating new bank accounts for customers, transferring amounts between accounts, retrieving balances for accounts, and retrieving transfer history for accounts.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tasks
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The following tasks must be implemented using PHP and Laravel:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. Create API routes that allow bank employees to create new bank accounts for customers, with an initial deposit amount. A single customer may have multiple bank accounts.
+2. Create API routes that allow bank employees to transfer amounts between any two accounts, including those owned by different customers.
+3. Create API routes that allow bank employees to retrieve balances for accounts.
+4. Create API routes that allow bank employees to retrieve transfer history for accounts.
+5. Write tests for your business logic to ensure that the API functions correctly.
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+To install the project, follow these steps:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Clone the repository using bash (or download the ZIP file):
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+git clone https://github.com/mmdshry/smile-it-bank-api
+```
 
-## Laravel Sponsors
+2. Navigate to the project directory:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+cd smile-it-bank-api
+```
 
-### Premium Partners
+3. Install the dependencies:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```
+composer install
+```
 
-## Contributing
+4. Create a copy of the `.env.example` file and rename it to `.env`. Update the necessary database configuration in the `.env` file.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. Generate an application key:
 
-## Code of Conduct
+```
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Run the database migrations and seed the database with sample customers:
 
-## Security Vulnerabilities
+```
+php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+7. Run the project:
 
-## License
+```
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Running the Tests
+
+To run the tests, execute the following command:
+
+```
+php artisan test
+```
+
+The tests will ensure that the application's business logic and functionality are working as expected.
+
+## API Routes
+
+The following API routes are available:
+
+- `POST /api/v1/accounts` - Create a new bank account for a customer.
+- `GET /api/v1/accounts/{account}/balance` - Get the balance for a specific account.
+- `POST /api/v1/accounts/transfers` - Transfer amounts between accounts.
+- `GET /api/v1/accounts/{account}/transfers` - Get the transfer history for a specific account.
+
+## API Documentation
+
+### Endpoints
+
+#### `POST /api/accounts`
+
+Creates a new bank account for a customer.
+
+**Request Body**
+
+| Parameter | Type    | Description                     |
+| --------- | ------- | ------------------------------- |
+| `customer_id` | `integer` | The ID of the customer. |
+| `balance` | `number` | (Optional) The initial deposit amount. |
+
+**Response**
+
+- `201 Created`: The API responds with a JSON object containing the newly created account details, including the account ID, customer ID, current balance, and timestamps.
+- `422 Unprocessable Entity`: If the request data is invalid or missing required fields, the API responds with an error message specifying the issue.
+
+#### `GET /api/v1/accounts/{account}/balance`
+
+Retrieves the balance for a specific bank account.
+
+**Path Parameters**
+
+| Parameter | Description |
+| --------- | ----------- |
+| `account_id` | The ID of the account. |
+
+**Response**
+
+- `200 OK`: The API responds with a JSON object containing the current balance of the account.
+- `404 Not Found`: If the account ID does not exist, the API responds with an error message.
+
+#### `POST /api/v1/accounts/transfers`
+
+Transfers a specified amount from one bank account to another.
+
+**Request Body**
+
+| Parameter | Type    | Description                     |
+| --------- | ------- | ------------------------------- |
+| `source_account_id` | `integer` | The ID of the source account. |
+| `destination_account_id` | `integer` | The ID of the destination account. |
+| `amount` | `number` | The amount to transfer. |
+
+**Response**
+
+- `201 Created`: If the transfer is successful, the API responds with a JSON object containing a success message and the transfer record.
+- `422 Unprocessable Entity`: If the source account has insufficient balance for the transfer, or the request data is invalid, the API responds with an error message.
+
+#### `GET /api/v1/accounts/{account}/transfers`
+
+Retrieves the transfer history for a specific bank account.
+
+**Path Parameters**
+
+| Parameter | Description |
+| --------- | ----------- |
+| `account_id` | The ID of the account. |
+
+**Response**
+
+- `200 OK`: The API responds with a JSON array containing the transfer history for the specified account divided into two parts (incoming and outgoing). Each transfer record includes details such as the transfer ID, source account ID, destination account ID, and transfer amount.
+- `404 Not Found`: If the account ID does not exist, the API responds with an error message.
