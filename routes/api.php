@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\AccountController;
+use App\Http\Controllers\Api\V1\TransferController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1/accounts')->group(static function () {
+    Route::post('/', [AccountController::class, 'store'])->name('accounts.store');
+    Route::get('/{account}/balance', [AccountController::class, 'getBalance'])->name('accounts.getBalance');
+    Route::post('/transfers', [TransferController::class, 'store'])->name('transfers.store');
+    Route::get('/{account}/transfers', [TransferController::class, 'index'])->name('transfers.index');
 });
